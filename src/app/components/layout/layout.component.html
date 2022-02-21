@@ -5,8 +5,13 @@
         </div>
 
         <div class="content">
-            <img src="../../../assets/images/wow-how-that-happened-surprised-kirk.JPG">
-            <!-- <img src="../../../assets/images/i-like-it-thor-meme.JPG"> -->
+            <div *ngIf="false; else loader;">
+                <img src="../../../assets/images/wow-how-that-happened-surprised-kirk.JPG">
+                <!-- <img src="../../../assets/images/i-like-it-thor-meme.JPG"> -->
+            </div>
+            <ng-template #loader>
+                <mat-spinner></mat-spinner>
+            </ng-template>
         </div>
     </div>
 </div>
