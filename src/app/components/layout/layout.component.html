@@ -1,13 +1,12 @@
 <div class="overlay-container">
     <div class="main-content">
         <div class="heading-container">
-            <button mat-raised-button color="primary">Fetch me some meme</button>
+            <button mat-raised-button color="primary" (click)="fetchRandomMeme()">Fetch me some meme</button>
         </div>
 
-        <div class="content">
-            <div *ngIf="false; else loader;">
-                <img src="../../../assets/images/wow-how-that-happened-surprised-kirk.JPG">
-                <!-- <img src="../../../assets/images/i-like-it-thor-meme.JPG"> -->
+        <div class="content" *ngIf="displayMemeContainer">
+            <div *ngIf="loaded; else loader;">
+                <img [src]="currentMeme$ | async">
             </div>
             <ng-template #loader>
                 <mat-spinner></mat-spinner>
