@@ -6,15 +6,19 @@ import { delay, Observable, of } from 'rxjs';
 })
 export class ImagesService {
 
-  private allMemes = [
+  private allImages = [
     '../../../assets/images/wow-how-that-happened-surprised-kirk.JPG',
-    '../../../assets/images/i-like-it-thor-meme.JPG'
+    '../../../assets/images/i-like-it-thor.JPG',
+    '../../../assets/images/wait-thats-illegal.JPG',
+    '../../../assets/images/high-ground.JPG',
+    '../../../assets/images/impossible-thanos.JPG',
+    '../../../assets/images/this-is-where-the-fun-begins.JPG',
   ]
 
   constructor() { }
 
-  randomMeme(): Observable<string> {
-    const randomNumberFromAllMemesLength = Math.floor(Math.random() * this.allMemes.length);
-    return of(this.allMemes[randomNumberFromAllMemesLength]).pipe(delay(2000));
+  randomImage(): Observable<string> {
+    const randomIndexOfImagesRange = Math.floor(Math.random() * this.allImages.length);
+    return of(this.allImages[randomIndexOfImagesRange]).pipe(delay(2000));
   }
 }

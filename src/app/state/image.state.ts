@@ -9,7 +9,7 @@ export interface ImageStateModel {
 }
 
 @State({
-  name: 'meme',
+  name: 'image',
   defaults: {
     chosenImage: false
   }
@@ -20,7 +20,7 @@ export class ImageState {
 
   @Action(FetchRandomImage)
   fetchRandomImage(ctx: StateContext<ImageStateModel>) {
-    return this.imagesService.randomMeme().pipe(
+    return this.imagesService.randomImage().pipe(
       tap((image: string) => {
         const state = ctx.getState();
         ctx.setState({

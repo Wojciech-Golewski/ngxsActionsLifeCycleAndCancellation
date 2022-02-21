@@ -1,10 +1,10 @@
 <div class="overlay-container">
     <div class="main-content">
         <div class="heading-container">
-            <button mat-raised-button color="primary" (click)="fetchRandomMeme()">Fetch me some meme</button>
+            <button mat-raised-button color="primary" (click)="fetchRandomImage()">Fetch random image</button>
         </div>
 
-        <div class="content" *ngIf="displayMemeContainer">
+        <div class="content" *ngIf="displayImageContainer" [@extendContent]="displayImageContainer">
             <div *ngIf="loaded; else loader;">
                 <img [src]="currentImage$ | async">
             </div>
