@@ -9,8 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
-import { MemeState } from './state/meme.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { ImageState } from './state/image.state';
 
 
 
@@ -25,7 +25,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
     BrowserAnimationsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    NgxsModule.forRoot([MemeState], {
+    NgxsModule.forRoot([ImageState], {
       developmentMode: !environment.production
     }),
     NgxsReduxDevtoolsPluginModule.forRoot()

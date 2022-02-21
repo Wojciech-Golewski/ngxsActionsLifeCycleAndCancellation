@@ -6,7 +6,7 @@
 
         <div class="content" *ngIf="displayMemeContainer">
             <div *ngIf="loaded; else loader;">
-                <img [src]="currentMeme$ | async">
+                <img [src]="currentImage$ | async">
             </div>
             <ng-template #loader>
                 <mat-spinner></mat-spinner>

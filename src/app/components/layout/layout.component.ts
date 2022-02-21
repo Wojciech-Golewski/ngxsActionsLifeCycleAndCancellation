@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { FetchRandomMeme } from 'src/app/state/meme.actions';
-import { MemeState } from 'src/app/state/meme.state';
+import { FetchRandomImage } from 'src/app/state/image.actions';
+import { ImageState } from 'src/app/state/image.state';
 
 @Component({
   selector: 'app-layout',
@@ -10,7 +10,7 @@ import { MemeState } from 'src/app/state/meme.state';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  @Select(MemeState.getCurrentMeme) currentMeme$: Observable<string> | undefined;
+  @Select(ImageState.getCurrentImage) currentImage$: Observable<string> | undefined;
   loaded = false;
   displayMemeContainer = false;
 
@@ -20,7 +20,7 @@ export class LayoutComponent implements OnInit {
 
   fetchRandomMeme(): void {
     this.loaded = false;
-    this.store.dispatch(new FetchRandomMeme()).subscribe(() => {
+    this.store.dispatch(new FetchRandomImage()).subscribe(() => {
       this.loaded = true;
     })
     this.displayMemeContainer = true;

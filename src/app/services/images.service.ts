@@ -4,7 +4,7 @@ import { delay, Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MemeArchiveService {
+export class ImagesService {
 
   private allMemes = [
     '../../../assets/images/wow-how-that-happened-surprised-kirk.JPG',
