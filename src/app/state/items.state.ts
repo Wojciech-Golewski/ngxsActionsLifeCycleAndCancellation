@@ -19,7 +19,7 @@ export interface ItemsStateModel {
 export class ItemsState {
   constructor(private itemsService: ItemsService) {}
 
-  @Action(AddItem)
+  @Action(AddItem, { cancelUncompleted: true })
   addItem(ctx: StateContext<ItemsStateModel>, action: AddItem) {
     // below is error for testing
     // throw new Error('');
@@ -36,7 +36,7 @@ export class ItemsState {
     );
   }
   
-  @Action(RemoveItem)
+  @Action(RemoveItem, { cancelUncompleted: true })
   removeItem(ctx: StateContext<ItemsStateModel>, action: RemoveItem) {
     // below is error for testing
     // throw new Error('');
