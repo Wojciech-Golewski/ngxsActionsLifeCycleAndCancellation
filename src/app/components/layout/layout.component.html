@@ -8,7 +8,7 @@
                     <mat-icon>close</mat-icon>
                 </button>
             </mat-form-field>
-            <button mat-raised-button color="primary" class="add-btn" (click)="addItem(item)">
+            <button mat-raised-button color="primary" class="add-btn" (click)="addItem(item)" [disabled]="item.length === 0">
                 Add item
             </button>
         </div>
