@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { tap } from "rxjs";
+import { delay, of, tap } from "rxjs";
 import { Item } from "../models/item";
 import { ItemsService } from "../services/items.service";
 import { AddItem, RemoveItem } from "./items.actions";
@@ -21,6 +21,9 @@ export class ItemsState {
 
   @Action(AddItem)
   addItem(ctx: StateContext<ItemsStateModel>, action: AddItem) {
+    // below is error for testing
+    // throw new Error('');
+    
     return this.itemsService.addItem(action.payload).pipe(
       tap((addedItem: Item) => {
         const state = ctx.getState();
@@ -35,6 +38,9 @@ export class ItemsState {
   
   @Action(RemoveItem)
   removeItem(ctx: StateContext<ItemsStateModel>, action: RemoveItem) {
+    // below is error for testing
+    // throw new Error('');
+
     return this.itemsService.removeItem(action.payload).pipe(
       tap((itemId: number) => {
         const state = ctx.getState();
