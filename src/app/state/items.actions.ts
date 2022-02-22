@@ -9,3 +9,7 @@ export class RemoveItem {
     static readonly type = '[Items] Remove Item';
     constructor(public payload: number) {}
 }
+
+export class FetchAllItems {
+    static readonly type = '[Items] Fetch All Items';
+}

@@ -13,17 +13,18 @@ export class ItemsService {
 
   addItem(item: Item): Observable<Item> {
     item.id = this.idNumber;
+    this.allItems = Object.assign([], this.allItems);
     this.allItems.push(item);
     this.idNumber++;
     return of(item).pipe(delay(1000));
   }
 
-  removeItem(itemId: number): Observable<number> {
+  removeItem(itemId: number): Observable<void> {
     this.allItems = this.allItems.filter((item: Item) => item.id !== itemId);
-    return of(itemId).pipe(delay(500));
+    return of(undefined);
   }
 
   getAllItems(): Observable<Item[]> {
-    return of(this.allItems).pipe(delay(1500));
+    return of(this.allItems).pipe(delay(3000));
   }
 }

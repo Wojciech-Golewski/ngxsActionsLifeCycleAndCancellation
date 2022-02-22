@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { delay, of, tap } from "rxjs";
+import { delay, mergeMap, of, tap } from "rxjs";
 import { Item } from "../models/item";
 import { ItemsService } from "../services/items.service";
-import { AddItem, RemoveItem } from "./items.actions";
+import { AddItem, FetchAllItems, RemoveItem } from "./items.actions";
 
 export interface ItemsStateModel {
   items: Item[];
@@ -34,6 +34,10 @@ export class ItemsState {
         console.log('New item added to the state!');
       })
     );
+    // you can comment out above return and use the one below
+    // return this.itemsService.addItem(action.payload).pipe(
+    //   mergeMap(() => ctx.dispatch(new FetchAllItems()))
+    // );
   }
   
   @Action(RemoveItem, { cancelUncompleted: true })
@@ -42,15 +46,21 @@ export class ItemsState {
     // throw new Error('');
 
     return this.itemsService.removeItem(action.payload).pipe(
-      tap((itemId: number) => {
+      mergeMap(() => ctx.dispatch(new FetchAllItems()))
+    )
+  }
+
+  @Action(FetchAllItems)
+  fetchAllItems(ctx: StateContext<ItemsStateModel>) {
+    return this.itemsService.getAllItems().pipe(
+      tap((items: Item[]) => {
         const state = ctx.getState();
         ctx.setState({
           ...state,
-          items: state.items.filter((item: Item) => item.id !== itemId)
+          items: items,
         });
-        console.log('Item has been removed from the state!');
       })
-    );
+    )
   }
 
   @Selector()
