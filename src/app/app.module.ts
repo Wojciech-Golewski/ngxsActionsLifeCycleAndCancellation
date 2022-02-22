@@ -10,8 +10,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { ImageState } from './state/image.state';
-
+import { ItemsState } from './state/items.state';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -23,9 +26,13 @@ import { ImageState } from './state/image.state';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    NgxsModule.forRoot([ImageState], {
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    NgxsModule.forRoot([ItemsState], {
       developmentMode: !environment.production
     }),
     NgxsReduxDevtoolsPluginModule.forRoot()
