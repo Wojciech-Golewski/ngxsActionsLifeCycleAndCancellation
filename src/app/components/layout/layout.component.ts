@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Item } from 'src/app/models/item';
 import { AddItem, RemoveItem } from 'src/app/state/items.actions';
 import { ItemsState } from 'src/app/state/items.state';
@@ -12,19 +12,20 @@ import { Actions, ofActionCompleted, ActionCompletion } from '@ngxs/store';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
   @Select(ItemsState.getAllItems) allItems$: Observable<Item[]> | undefined;
   loadingItems: boolean[] = [];
   item = '';
 
   private horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   private verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private ngUnsubscribe = new Subject<void>();
 
   constructor(private _snackBar: MatSnackBar, private store: Store, private actions$: Actions) { }
 
   ngOnInit(): void {
     this.actions$
-      .pipe(ofActionCompleted(AddItem, RemoveItem))
+      .pipe(ofActionCompleted(AddItem, RemoveItem), takeUntil(this.ngUnsubscribe))
       .subscribe((data: ActionCompletion) => {
         if (data.result.successful) {
           if (data.action instanceof RemoveItem) {
@@ -46,6 +47,11 @@ export class LayoutComponent implements OnInit {
         }
         this.loadingItems.pop();
       });
+  }
+
+  ngOnDestroy(): void {
+      this.ngUnsubscribe.next();
+      this.ngUnsubscribe.complete();
   }
 
   addItem(itemName: string): void {
