@@ -31,7 +31,6 @@ export class ItemsState {
           ...state,
           items: state.items.concat(addedItem)
         });
-        console.log('New item added to the state!');
       })
     );
   }
@@ -48,7 +47,6 @@ export class ItemsState {
           ...state,
           items: state.items.filter((item: Item) => item.id !== itemId)
         });
-        console.log('Item has been removed from the state!');
       })
     );
   }
