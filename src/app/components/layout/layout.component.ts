@@ -22,14 +22,9 @@ export class LayoutComponent implements OnInit {
   addItem(itemName: string): void {
     this.loadingItems.push(true);
 
-    this.store.dispatch(new AddItem(new Item(itemName))).subscribe({
-      complete: () => {
-        this.loadingItems.pop();
-      },
-      error: (error) => {
-        this.loadingItems.pop();
-      }
-    });
+    this.store.dispatch(new AddItem(new Item(itemName))).subscribe(() =>
+        this.loadingItems.pop()
+    );
   }
 
   removeItem(id: number): void {
